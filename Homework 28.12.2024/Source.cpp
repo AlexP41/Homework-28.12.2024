@@ -45,7 +45,11 @@ int addColumn(int& numberOfColumns, int numberOfRows, T**& arr);
 template <typename T>
 int removeColumn(int& numberOfColumns, int numberOfRows, T**& arr);
 
-void userChoiceForExThree();
+template <typename Type>
+void userChoiceForExThree(int amountRows, int amountColumns, Type& array);
+
+template <typename T>
+void shiftArray(int rows, int columns, T**& arr);
 
 
 int main()
@@ -135,12 +139,7 @@ int main()
 
 	outputArray(M, N, false, Array_3);
 
-	/*while(true)
-	{
-		
-	}*/
-
-	userChoiceForExThree();
+	userChoiceForExThree(M, N, Array_3);
 
 
 
@@ -249,28 +248,151 @@ int userInputNumber(string arrayName)
 	return userNum;
 }
 
-void userChoiceForExThree()
+template <typename T>
+void shiftArray(int rows, int columns, T**& arr)
 {
-	int userNum;
-	int amountsOfOptions = 3;
-	int* arrayOfPossibleOptions = new int[amountsOfOptions];
-	bool menuOn = true;
+	int choice;
+	while (true) {
+		cout << endl
+			<< "\033[033mВиберіть тип зсуву:\033[0m" << endl
+			<< "\t\t1 - Зсув рядка (вправо/вліво)" << endl
+			<< "\t\t2 - Зсув стовпця (вниз/вгору)" << endl;
+		cout << "\033[033mВаш вибір: \033[0m";
+		cin >> choice;
 
-	for (int i = 0; i < amountsOfOptions; i++)
-	{
-		arrayOfPossibleOptions[i] = i;
+		if (cin.fail() || (choice != 1 && choice != 2)) {
+			cout << endl << "\033[031mПомилка! Введіть 1 або 2.\033[0m\n" << endl;
+			cin.clear();
+			cin.ignore(1000, '\n');
+			continue;
+		}
+		break;
 	}
 
-	while (menuOn)
-	{
-		bool isNotValid = false;
-		cout << endl << "\033[033mЩо бажаєте робити з масивом: \033[0m" << endl <<
-				         "\t\t0 - вихід з меню;" << endl << 
-						 "\t\t1 - зробити зсув по рядках;" << endl << 
-						 "\t\t2 - зробити зсув по колонках;" << endl;
-		cout << "\033[033mВведіть ваш вибір: \033[0m";
-		cin >> userNum;
+	if (choice == 1) {
+		int userRow, direction;
+		while (true) {
+			cout << endl << "\033[033mВведіть номер рядка для зсуву (1-" << rows << "): \033[0m";
+			cin >> userRow;
 
+			if (cin.fail() || userRow < 1 || userRow > rows) {
+				cout << endl << "\033[031mПомилка! Введіть коректний номер рядка.\033[0m\n" << endl;
+				cin.clear();
+				cin.ignore(1000, '\n');
+				continue;
+			}
+			break;
+		}
+
+		while (true) {
+			cout << endl
+				<< "\033[033mВиберіть напрямок зсуву:\033[0m" << endl
+				<< "\t\t1 - Вправо" << endl
+				<< "\t\t2 - Вліво" << endl;
+			cout << "\033[033mВаш вибір: \033[0m";
+			cin >> direction;
+
+			if (cin.fail() || (direction != 1 && direction != 2)) {
+				cout << endl << "\033[031mПомилка! Виберіть 1 або 2.\033[0m\n" << endl;
+				cin.clear();
+				cin.ignore(1000, '\n');
+				continue;
+			}
+			break;
+		}
+
+		userRow -= 1;
+
+		if (direction == 1) {
+			T temp = arr[userRow][columns - 1]; 
+			for (int col = columns - 1; col > 0; col--) {
+				arr[userRow][col] = arr[userRow][col - 1];
+			}
+			arr[userRow][0] = temp; 
+		}
+		else if (direction == 2) {
+			T temp = arr[userRow][0]; 
+			for (int col = 0; col < columns - 1; col++) {
+				arr[userRow][col] = arr[userRow][col + 1];
+			}
+			arr[userRow][columns - 1] = temp; 
+		}
+	}
+	else if (choice == 2) {
+		int userColumn, direction;
+		while (true) {
+			cout << endl << "\033[033mВведіть номер стовпця для зсуву (1-" << columns << "): \033[0m";
+			cin >> userColumn;
+
+			if (cin.fail() || userColumn < 1 || userColumn > columns) {
+				cout << endl << "\033[031mПомилка! Введіть коректний номер стовпця.\033[0m\n" << endl;
+				cin.clear();
+				cin.ignore(1000, '\n');
+				continue;
+			}
+			break;
+		}
+
+		while (true) {
+			cout << endl
+				<< "\033[033mВиберіть напрямок зсуву:\033[0m" << endl
+				<< "\t\t1 - Вниз" << endl
+				<< "\t\t2 - Вгору" << endl;
+			cout << "\033[033mВаш вибір: \033[0m";
+			cin >> direction;
+
+			if (cin.fail() || (direction != 1 && direction != 2)) {
+				cout << endl << "\033[031mПомилка! Виберіть 1 або 2.\033[0m\n" << endl;
+				cin.clear();
+				cin.ignore(1000, '\n');
+				continue;
+			}
+			break;
+		}
+
+		userColumn -= 1; 
+
+		if (direction == 1) {
+			T temp = arr[rows - 1][userColumn]; 
+			for (int row = rows - 1; row > 0; row--) {
+				arr[row][userColumn] = arr[row - 1][userColumn];
+			}
+			arr[0][userColumn] = temp; 
+		}
+		else if (direction == 2) {
+			T temp = arr[0][userColumn]; 
+			for (int row = 0; row < rows - 1; row++) {
+				arr[row][userColumn] = arr[row + 1][userColumn];
+			}
+			arr[rows - 1][userColumn] = temp; 
+		}
+	}
+
+	cout << "\n\033[032mОновлений масив:\033[0m\n";
+	outputArray(rows, columns, false, arr, 0);
+}
+
+template <typename Type>
+void userChoiceForExThree(int amountRows, int amountColumns, Type& array)
+{
+	int userNum;
+	int countOfChanges = 0;
+
+	while (true)
+	{
+		countOfChanges++;
+		if (countOfChanges != 1) 
+		{
+			cout << endl << "\033[032mБажаєте продовжити робиту з масивом?\033[0m" << endl <<
+				"\t\t1 - Так;" << endl <<
+				"\t\t2 - Ні;" << endl;
+			cout << "\033[032mВведіть ваш вибір: \033[0m";
+			cin >> userNum;
+		}
+		else
+		{
+			userNum = 1;
+		}
 
 		if (cin.fail())
 		{
@@ -279,38 +401,15 @@ void userChoiceForExThree()
 			cin.ignore(1000, '\n');
 			continue;
 		}
-
-		for (int i = 0; i < amountsOfOptions; i++)
-		{
-			if (userNum == arrayOfPossibleOptions[i])
-			{
-				isNotValid = true;
-				break;
-			}
-			else { continue; }
-		}
-
-		if (!isNotValid)
-		{
-			cout << endl << "\033[031m Помилка! Будь ласка, переконайтесяб що ви обрали існуючий варіант в меню.\033[0m\n" << endl;
-			continue;
-		}
-
-		switch (userNum)
-		{
-		case 0:
-			menuOn = false;
-			break;
-		case 1:
-			cout << endl << "Example 1 has been completed" << endl;
-			break;
-		case 2:
-			cout << endl << "Example 2 has been completed" << endl;
-			break;
-		default:
-			break;
-		}
 		
+		if (userNum == 1) 
+		{
+			shiftArray(amountRows, amountColumns, array);
+		}
+		else 
+		{
+			break;
+		}
 	}
 }
 

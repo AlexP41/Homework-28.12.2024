@@ -2,9 +2,6 @@
 БАГАТОВИМІРНІ ДИНАМІЧНІ МАСИВИ
 ==============================
 
-№2
-	Написати функцію, що видаляє стовпчик двовимірного масиву за вказаним номером.
-
 №3
 	Дано матрицю порядку MxN (M рядків, N стовпців). Необхідно заповнити її значеннями і написати функцію,
 	що здійснює циклічний зсув рядків та/або стовпчиків масиву вказану кількість разів і в зазначену сторону.
@@ -28,8 +25,8 @@ https://fsx1.itstep.org/api/v1/files/XUktlJsLKP_gytLegZ8WrOEc_IJ7aJgy?inline=tru
 #include <locale>
 #include <string>
 
-#define LOW_BOARD_FOR_GENERATION_NUMBERS -5
-#define HIGH_BOARD_FOR_GENERATION_NUMBERS 5
+#define LOW_BOARD_FOR_GENERATION_NUMBERS -10
+#define HIGH_BOARD_FOR_GENERATION_NUMBERS 10
 
 
 using namespace std;
@@ -47,6 +44,8 @@ int addColumn(int& numberOfColumns, int numberOfRows, T**& arr);
 
 template <typename T>
 int removeColumn(int& numberOfColumns, int numberOfRows, T**& arr);
+
+void userChoiceForExThree();
 
 
 int main()
@@ -112,6 +111,39 @@ int main()
 
 	outputArray(row2, col2, false, Array_2);
 
+	/*
+	№3
+	Дано матрицю порядку MxN (M рядків, N стовпців). Необхідно заповнити її значеннями і написати функцію,
+	що здійснює циклічний зсув рядків та/або стовпчиків масиву вказану кількість разів і в зазначену сторону.
+	*/
+
+
+	exercise(3);
+
+	int M, N;
+
+	M = userInputNumber("рядків");
+	N = userInputNumber("стовпчиків");
+
+	int** Array_3 = new int* [M];
+
+	fullArray(M, N, Array_3);
+
+	cout << endl;
+
+	cout << "\033[033mВиведення масиву: \033[0m" << endl;
+
+	outputArray(M, N, false, Array_3);
+
+	/*while(true)
+	{
+		
+	}*/
+
+	userChoiceForExThree();
+
+
+
 	for (int i = 0; i < row; i++) {
 		delete[] Array_1[i];
 	}
@@ -121,6 +153,11 @@ int main()
 		delete[] Array_2[i];
 	}
 	delete[] Array_2;
+
+	for (int i = 0; i < row; i++) {
+		delete[] Array_3[i];
+	}
+	delete[] Array_3;
 
 	return 0;
 }
@@ -210,6 +247,71 @@ int userInputNumber(string arrayName)
 	}
 
 	return userNum;
+}
+
+void userChoiceForExThree()
+{
+	int userNum;
+	int amountsOfOptions = 3;
+	int* arrayOfPossibleOptions = new int[amountsOfOptions];
+	bool menuOn = true;
+
+	for (int i = 0; i < amountsOfOptions; i++)
+	{
+		arrayOfPossibleOptions[i] = i;
+	}
+
+	while (menuOn)
+	{
+		bool isNotValid = false;
+		cout << endl << "\033[033mЩо бажаєте робити з масивом: \033[0m" << endl <<
+				         "\t\t0 - вихід з меню;" << endl << 
+						 "\t\t1 - зробити зсув по рядках;" << endl << 
+						 "\t\t2 - зробити зсув по колонках;" << endl;
+		cout << "\033[033mВведіть ваш вибір: \033[0m";
+		cin >> userNum;
+
+
+		if (cin.fail())
+		{
+			cout << endl << "\033[031m Помилка! Будь ласка, введіть число.\033[0m\n" << endl;
+			cin.clear();
+			cin.ignore(1000, '\n');
+			continue;
+		}
+
+		for (int i = 0; i < amountsOfOptions; i++)
+		{
+			if (userNum == arrayOfPossibleOptions[i])
+			{
+				isNotValid = true;
+				break;
+			}
+			else { continue; }
+		}
+
+		if (!isNotValid)
+		{
+			cout << endl << "\033[031m Помилка! Будь ласка, переконайтесяб що ви обрали існуючий варіант в меню.\033[0m\n" << endl;
+			continue;
+		}
+
+		switch (userNum)
+		{
+		case 0:
+			menuOn = false;
+			break;
+		case 1:
+			cout << endl << "Example 1 has been completed" << endl;
+			break;
+		case 2:
+			cout << endl << "Example 2 has been completed" << endl;
+			break;
+		default:
+			break;
+		}
+		
+	}
 }
 
 template <typename T>

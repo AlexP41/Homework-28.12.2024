@@ -2,18 +2,6 @@
 БАГАТОВИМІРНІ ДИНАМІЧНІ МАСИВИ
 ==============================
 
-№3
-	Дано матрицю порядку MxN (M рядків, N стовпців). Необхідно заповнити її значеннями і написати функцію,
-	що здійснює циклічний зсув рядків та/або стовпчиків масиву вказану кількість разів і в зазначену сторону.
-
-№4
-	Є 3 двовимірні масиви A, B, C. Для кожного з них користувач вводить із клавіатури кількість рядків і стовпців.
-	Заповніть масиви випадковими числами [-10, 10]. Створіть:
-		Одновимірний масив, який містить унікальні значення для A, B, C;
-		Одновимірний масив, який містить спільні значення для A і C;
-		Одновимірний масив, який містить від'ємні значення для A, B, C без повторень.
-
-
 Обов'язково до опрацювання навчальний матеріал
 https://fsx1.itstep.org/api/v1/files/XUktlJsLKP_gytLegZ8WrOEc_IJ7aJgy?inline=true
 
@@ -30,6 +18,8 @@ https://fsx1.itstep.org/api/v1/files/XUktlJsLKP_gytLegZ8WrOEc_IJ7aJgy?inline=tru
 
 
 using namespace std;
+
+#pragma region Functions Prototypes for exercises 1 , 2 , 3 , 4
 
 void exercise(int exerciseNumber);
 
@@ -51,6 +41,10 @@ void userChoiceForExThree(int amountRows, int amountColumns, Type& array);
 template <typename T>
 void shiftArray(int rows, int columns, T**& arr);
 
+void clearArray(int**& arr, int rows);
+
+#pragma endregion
+
 
 int main()
 {
@@ -61,6 +55,8 @@ int main()
 	№1
 	Написати функцію, що додає стовпчик двовимірному масиву в зазначену позицію.
 	*/
+
+#pragma region Exercise 1
 
 	exercise(1);
 
@@ -86,10 +82,14 @@ int main()
 
 	outputArray(row, col, true, Array_1, userColumn);
 
+#pragma endregion
+
 	/*
 	№2
 	Написати функцію, що видаляє стовпчик двовимірного масиву за вказаним номером.
 	*/
+
+#pragma region Exercise 2
 
 	exercise(2);
 
@@ -115,12 +115,15 @@ int main()
 
 	outputArray(row2, col2, false, Array_2);
 
+#pragma endregion
+
 	/*
 	№3
 	Дано матрицю порядку MxN (M рядків, N стовпців). Необхідно заповнити її значеннями і написати функцію,
 	що здійснює циклічний зсув рядків та/або стовпчиків масиву вказану кількість разів і в зазначену сторону.
 	*/
 
+#pragma region Exercise 3
 
 	exercise(3);
 
@@ -141,25 +144,93 @@ int main()
 
 	userChoiceForExThree(M, N, Array_3);
 
+#pragma endregion
+
+	/*
+	№4
+	Є 3 двовимірні масиви A, B, C. Для кожного з них користувач вводить із клавіатури кількість рядків і стовпців.
+	Заповніть масиви випадковими числами [-10, 10]. Створіть:
+		Одновимірний масив, який містить унікальні значення для A, B, C;
+		Одновимірний масив, який містить спільні значення для A і C;
+		Одновимірний масив, який містить від'ємні значення для A, B, C без повторень.
+	*/
+
+#pragma region Exercise 4
+
+	exercise(4);
+
+	int M1, N1, M2, N2, M3, N3;
 
 
-	for (int i = 0; i < row; i++) {
-		delete[] Array_1[i];
-	}
-	delete[] Array_1;
+	/* Array A */
+	cout << endl << "\t\t\033[035mВвід масиву А\033[0m" << endl;
 
-	for (int i = 0; i < row; i++) {
-		delete[] Array_2[i];
-	}
-	delete[] Array_2;
+	M1 = userInputNumber("рядків");
+	N1 = userInputNumber("стовпчиків");
 
-	for (int i = 0; i < row; i++) {
-		delete[] Array_3[i];
-	}
-	delete[] Array_3;
+	int** A = new int* [M1];
+
+	fullArray(M1, N1, A);
+
+	/* Array B */
+
+	cout << endl << "\t\t\033[035mВвід масиву B\033[0m" << endl;
+
+	M2 = userInputNumber("рядків");
+	N2 = userInputNumber("стовпчиків");
+
+	int** B = new int* [M2];
+
+	fullArray(M2, N2, B);
+
+	/* Array C */
+
+	cout << endl << "\t\t\033[035mВвід масиву C\033[0m" << endl;
+
+	M3 = userInputNumber("рядків");
+	N3 = userInputNumber("стовпчиків");
+
+	int** C = new int* [M3];
+
+	fullArray(M3, N3, C);
+
+	/* Output filled arrays */
+
+	cout << endl << "\t\t\033[035mВивід масиву A\033[0m" << endl;
+	outputArray(M1, N1, false, A);
+
+	cout << endl << "\t\t\033[035mВивід масиву B\033[0m" << endl;
+	outputArray(M2, N2, false, B);
+
+	cout << endl << "\t\t\033[035mВивід масиву C\033[0m" << endl;
+	outputArray(M3, N3, false, C);
+
+#pragma endregion
+
+    /* Deleting block for all arrays */
+#pragma region Deleting Arrays
+
+	clearArray(Array_1, row);
+
+	clearArray(Array_2, row2);
+
+	clearArray(Array_3, M);
+
+	clearArray(A, M1);
+
+	clearArray(B, M2);
+
+	clearArray(C, M3);
 
 	return 0;
+
+#pragma endregion
 }
+
+
+
+
+#pragma region Functions for exercise 1 , 2 , 3 , 4
 
 void exercise(int exerciseNumber)
 {
@@ -531,3 +602,14 @@ int removeColumn(int& numberOfColumns, int numberOfRows, T**& arr) {
 
 	return column;
 }
+
+void clearArray(int**& arr, int rows) {
+	for (int i = 0; i < rows; i++) {
+		delete[] arr[i];
+	}
+	delete[] arr;
+	arr = nullptr; // Уникнення "висячих" вказівників
+}
+
+
+#pragma endregion

@@ -284,6 +284,8 @@ int main()
 
 	delete[] uniqueNumbers;
 
+	delete[] commonVal;
+ 
 	return 0;
 
 #pragma endregion
@@ -735,10 +737,11 @@ pair<T*, int> commonValuesOfArrays(int amountOfArrays, ...)
 
 	va_list args;
 	va_start(args, amountOfArrays);
-	vector<T>arraysValues;
 
+	unordered_map<T, int>valueCount;
 	for (int i = 0; i < amountOfArrays; i++)
 	{
+		unordered_set<T>seenInCurrentArray;
 
 		int rows = va_arg(args, int);
 		int cols = va_arg(args, int);
@@ -748,33 +751,25 @@ pair<T*, int> commonValuesOfArrays(int amountOfArrays, ...)
 		{
 			for (int c = 0; c < cols; c++)
 			{
-				arraysValues.push_back(currentArray[r][c]);
+				if (seenInCurrentArray.find(currentArray[r][c]) == seenInCurrentArray.end())
+				{
+					valueCount[currentArray[r][c]]++;
+					seenInCurrentArray.insert(currentArray[r][c]);
+				}
 			}
 		}
 	}
 
-/* ########################################################################################*/
-
-	/* This part of code isn't work as it has assumed and expected, so it has to be 
-	   rewritten.
-	*/
-
-	unordered_map<T, int> frequency;
-	for (const T& num : arraysValues)
-	{
-		frequency[num]++;
-	}
+	va_end(args);
 
 	unordered_set<T>commonValues;
-	for (const T& num : arraysValues)
+	for (const auto& pair : valueCount)
 	{
-		if (frequency[num] > 1)
+		if (pair.second == amountOfArrays)
 		{
-			commonValues.insert(num);
+			commonValues.insert(pair.first);
 		}
 	}
-
-/* ###########################################################################################*/
 
 	int resultSize = commonValues.size();
 	T* resultArray = new T[resultSize];

@@ -14,7 +14,7 @@ https://fsx1.itstep.org/api/v1/files/XUktlJsLKP_gytLegZ8WrOEc_IJ7aJgy?inline=tru
 #include <string>
 #include <cstdarg>
 #include <vector>
-#include <set>
+#include <unordered_set>
 #include <unordered_map>
 #include <type_traits>
 #include <utility>
@@ -52,67 +52,10 @@ void clearArray(int**& arr, int rows);
 template <typename T>
 pair<T*, int> oneDimensionalArrayOfUniqueNumbers(int amountOfArrays, ...);
 
-#pragma endregion
-
 template <typename T>
-pair<T*, int> commonValuesOfArrays(int amountOfArrays, ...)
-{
-	static_assert(is_arithmetic_v<T>, "The template type T must be a numeric type.");
+pair<T*, int> commonValuesOfArrays(int amountOfArrays, ...);
 
-	va_list args;
-	va_start(args, amountOfArrays);
-	vector<T>arraysValues;
-
-	for (int i = 0; i < amountOfArrays; i++)
-	{
-
-		int rows = va_arg(args, int);
-		int cols = va_arg(args, int);
-		T** currentArray = va_arg(args, T**);
-
-		for (int r = 0; r < rows; r++)
-		{
-			for (int c = 0; c < cols; c++)
-			{
-				arraysValues.push_back(currentArray[r][c]);
-			}
-		}
-	}
-
-	unordered_map<T, int> frequency;
-	for (const T& num: arraysValues)
-	{
-		frequency[num]++;
-	}
-
-	set<T>commonValues;
-	for (const T& num : arraysValues)
-	{
-		if (frequency[num] > 1)
-		{
-			commonValues.insert(num);
-		}
-	}
-
-	int resultSize = commonValues.size();
-	T* resultArray = new T[resultSize];
-	int index = 0;
-	/*for (auto it = commonValues.begin(); it != commonValues.end(); it++)
-	{
-		resultArray[index] = *it;
-		index++;
-	}*/
-	for (const T& num : commonValues) {
-		// THis code snippet I took from Chat-GPT to fix "buffer overrun" warning
-		if (index >= resultSize) {
-			cerr << "Index out of bounds! Exceeding resultSize." << endl;
-			break; // Stop if overrun happens
-		}
-		resultArray[index++] = num;
-	}
-	
-	return make_pair(resultArray,index);
-}
+#pragma endregion
 
 
 int main()
@@ -783,6 +726,74 @@ pair<T*, int> oneDimensionalArrayOfUniqueNumbers(int amountOfArrays, ...)
 	}
 
 	return make_pair(resultArray, uniqueSize);
+}
+
+template <typename T>
+pair<T*, int> commonValuesOfArrays(int amountOfArrays, ...)
+{
+	static_assert(is_arithmetic_v<T>, "The template type T must be a numeric type.");
+
+	va_list args;
+	va_start(args, amountOfArrays);
+	vector<T>arraysValues;
+
+	for (int i = 0; i < amountOfArrays; i++)
+	{
+
+		int rows = va_arg(args, int);
+		int cols = va_arg(args, int);
+		T** currentArray = va_arg(args, T**);
+
+		for (int r = 0; r < rows; r++)
+		{
+			for (int c = 0; c < cols; c++)
+			{
+				arraysValues.push_back(currentArray[r][c]);
+			}
+		}
+	}
+
+/* ########################################################################################*/
+
+	/* This part of code isn't work as it has assumed and expected, so it has to be 
+	   rewritten.
+	*/
+
+	unordered_map<T, int> frequency;
+	for (const T& num : arraysValues)
+	{
+		frequency[num]++;
+	}
+
+	unordered_set<T>commonValues;
+	for (const T& num : arraysValues)
+	{
+		if (frequency[num] > 1)
+		{
+			commonValues.insert(num);
+		}
+	}
+
+/* ###########################################################################################*/
+
+	int resultSize = commonValues.size();
+	T* resultArray = new T[resultSize];
+	int index = 0;
+	/*for (auto it = commonValues.begin(); it != commonValues.end(); it++)
+	{
+		resultArray[index] = *it;
+		index++;
+	}*/
+	for (const T& num : commonValues) {
+		// THis code snippet I took from Chat-GPT to fix "buffer overrun" warning
+		if (index >= resultSize) {
+			cerr << "Index out of bounds! Exceeding resultSize." << endl;
+			break; // Stop if overrun happens
+		}
+		resultArray[index++] = num;
+	}
+
+	return make_pair(resultArray, index);
 }
 
 #pragma endregion

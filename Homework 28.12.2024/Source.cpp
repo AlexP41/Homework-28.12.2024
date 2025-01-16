@@ -343,9 +343,9 @@ int main()
 
 	delete[] negativeNumbersForABC;
  
-	return 0;
-
 #pragma endregion
+
+	return 0;
 }
 
 
@@ -894,3 +894,7 @@ pair <T*, int> negativeNumbersOfArrays(int  amountOfArrays, ...)
 }
 
 #pragma endregion
+
+
+
+/* Homewrok on 28.12.2024 has been completed successfully! */

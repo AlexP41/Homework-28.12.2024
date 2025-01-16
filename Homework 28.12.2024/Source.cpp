@@ -1,11 +1,11 @@
 /*
-БАГАТОВИМІРНІ ДИНАМІЧНІ МАСИВИ
+Р‘РђР“РђРўРћР’РРњР†Р РќР† Р”РРќРђРњР†Р§РќР† РњРђРЎРР’Р
 ==============================
 
-Обов'язково до опрацювання навчальний матеріал
+РћР±РѕРІ'СЏР·РєРѕРІРѕ РґРѕ РѕРїСЂР°С†СЋРІР°РЅРЅСЏ РЅР°РІС‡Р°Р»СЊРЅРёР№ РјР°С‚РµСЂС–Р°Р»
 https://fsx1.itstep.org/api/v1/files/XUktlJsLKP_gytLegZ8WrOEc_IJ7aJgy?inline=true
 
-РЕЗУЛЬТАТ РОБОТИ: посилання на GitHub
+Р Р•Р—РЈР›Р¬РўРђРў Р РћР‘РћРўР: РїРѕСЃРёР»Р°РЅРЅСЏ РЅР° GitHub
 */
 #include <iostream>
 #include <ctime>
@@ -68,8 +68,8 @@ int main()
 	srand(time(NULL));
 
 	/*
-	№1
-	Написати функцію, що додає стовпчик двовимірному масиву в зазначену позицію.
+	в„–1
+	РќР°РїРёСЃР°С‚Рё С„СѓРЅРєС†С–СЋ, С‰Рѕ РґРѕРґР°С” СЃС‚РѕРІРїС‡РёРє РґРІРѕРІРёРјС–СЂРЅРѕРјСѓ РјР°СЃРёРІСѓ РІ Р·Р°Р·РЅР°С‡РµРЅСѓ РїРѕР·РёС†С–СЋ.
 	*/
 
 #pragma region Exercise 1
@@ -78,8 +78,8 @@ int main()
 
 	int row, col;
 
-	row = userInputNumber("рядків");
-	col = userInputNumber("стовпчиків");
+	row = userInputNumber("СЂСЏРґРєС–РІ");
+	col = userInputNumber("СЃС‚РѕРІРїС‡РёРєС–РІ");
 
 
 	int** Array_1 = new int* [row];
@@ -88,21 +88,21 @@ int main()
 
 	cout << endl;
 
-	cout << "\033[033mВиведення масиву: \033[0m" << endl;
+	cout << "\033[033mР’РёРІРµРґРµРЅРЅСЏ РјР°СЃРёРІСѓ: \033[0m" << endl;
 
 	outputArray(row, col, false, Array_1);
 
 	int userColumn = addColumn(col, row, Array_1);
 
-	cout << "\033[033mВиведення масиву з новим \033[035m" << to_string(userColumn) << "\033[33m стовпчиком: \033[0m" << endl;
+	cout << "\033[033mР’РёРІРµРґРµРЅРЅСЏ РјР°СЃРёРІСѓ Р· РЅРѕРІРёРј \033[035m" << to_string(userColumn) << "\033[33m СЃС‚РѕРІРїС‡РёРєРѕРј: \033[0m" << endl;
 
 	outputArray(row, col, true, Array_1, userColumn);
 
 #pragma endregion
 
 	/*
-	№2
-	Написати функцію, що видаляє стовпчик двовимірного масиву за вказаним номером.
+	в„–2
+	РќР°РїРёСЃР°С‚Рё С„СѓРЅРєС†С–СЋ, С‰Рѕ РІРёРґР°Р»СЏС” СЃС‚РѕРІРїС‡РёРє РґРІРѕРІРёРјС–СЂРЅРѕРіРѕ РјР°СЃРёРІСѓ Р·Р° РІРєР°Р·Р°РЅРёРј РЅРѕРјРµСЂРѕРј.
 	*/
 
 #pragma region Exercise 2
@@ -111,8 +111,8 @@ int main()
 
 	int row2, col2;
 
-	row2 = userInputNumber("рядків");
-	col2 = userInputNumber("стовпчиків");
+	row2 = userInputNumber("СЂСЏРґРєС–РІ");
+	col2 = userInputNumber("СЃС‚РѕРІРїС‡РёРєС–РІ");
 
 
 	int** Array_2 = new int* [row2];
@@ -121,22 +121,22 @@ int main()
 
 	cout << endl;
 
-	cout << "\033[033mВиведення масиву: \033[0m" << endl;
+	cout << "\033[033mР’РёРІРµРґРµРЅРЅСЏ РјР°СЃРёРІСѓ: \033[0m" << endl;
 
 	outputArray(row2, col2, false, Array_2);
 
 	int userColumn2 = removeColumn(col2, row2, Array_2);
 
-	cout << "\033[033mВиведення масиву з видаленим \033[035m" << to_string(userColumn2) << "\033[33m стовпчиком: \033[0m" << endl;
+	cout << "\033[033mР’РёРІРµРґРµРЅРЅСЏ РјР°СЃРёРІСѓ Р· РІРёРґР°Р»РµРЅРёРј \033[035m" << to_string(userColumn2) << "\033[33m СЃС‚РѕРІРїС‡РёРєРѕРј: \033[0m" << endl;
 
 	outputArray(row2, col2, false, Array_2);
 
 #pragma endregion
 
 	/*
-	№3
-	Дано матрицю порядку MxN (M рядків, N стовпців). Необхідно заповнити її значеннями і написати функцію,
-	що здійснює циклічний зсув рядків та/або стовпчиків масиву вказану кількість разів і в зазначену сторону.
+	в„–3
+	Р”Р°РЅРѕ РјР°С‚СЂРёС†СЋ РїРѕСЂСЏРґРєСѓ MxN (M СЂСЏРґРєС–РІ, N СЃС‚РѕРІРїС†С–РІ). РќРµРѕР±С…С–РґРЅРѕ Р·Р°РїРѕРІРЅРёС‚Рё С—С— Р·РЅР°С‡РµРЅРЅСЏРјРё С– РЅР°РїРёСЃР°С‚Рё С„СѓРЅРєС†С–СЋ,
+	С‰Рѕ Р·РґС–Р№СЃРЅСЋС” С†РёРєР»С–С‡РЅРёР№ Р·СЃСѓРІ СЂСЏРґРєС–РІ С‚Р°/Р°Р±Рѕ СЃС‚РѕРІРїС‡РёРєС–РІ РјР°СЃРёРІСѓ РІРєР°Р·Р°РЅСѓ РєС–Р»СЊРєС–СЃС‚СЊ СЂР°Р·С–РІ С– РІ Р·Р°Р·РЅР°С‡РµРЅСѓ СЃС‚РѕСЂРѕРЅСѓ.
 	*/
 
 #pragma region Exercise 3
@@ -145,8 +145,8 @@ int main()
 
 	int M, N;
 
-	M = userInputNumber("рядків");
-	N = userInputNumber("стовпчиків");
+	M = userInputNumber("СЂСЏРґРєС–РІ");
+	N = userInputNumber("СЃС‚РѕРІРїС‡РёРєС–РІ");
 
 	int** Array_3 = new int* [M];
 
@@ -154,7 +154,7 @@ int main()
 
 	cout << endl;
 
-	cout << "\033[033mВиведення масиву: \033[0m" << endl;
+	cout << "\033[033mР’РёРІРµРґРµРЅРЅСЏ РјР°СЃРёРІСѓ: \033[0m" << endl;
 
 	outputArray(M, N, false, Array_3);
 
@@ -163,12 +163,12 @@ int main()
 #pragma endregion
 
 	/*
-	№4
-	Є 3 двовимірні масиви A, B, C. Для кожного з них користувач вводить із клавіатури кількість рядків і стовпців.
-	Заповніть масиви випадковими числами [-10, 10]. Створіть:
-		Одновимірний масив, який містить унікальні значення для A, B, C;
-		Одновимірний масив, який містить спільні значення для A і C;
-		Одновимірний масив, який містить від'ємні значення для A, B, C без повторень.
+	в„–4
+	Р„ 3 РґРІРѕРІРёРјС–СЂРЅС– РјР°СЃРёРІРё A, B, C. Р”Р»СЏ РєРѕР¶РЅРѕРіРѕ Р· РЅРёС… РєРѕСЂРёСЃС‚СѓРІР°С‡ РІРІРѕРґРёС‚СЊ С–Р· РєР»Р°РІС–Р°С‚СѓСЂРё РєС–Р»СЊРєС–СЃС‚СЊ СЂСЏРґРєС–РІ С– СЃС‚РѕРІРїС†С–РІ.
+	Р—Р°РїРѕРІРЅС–С‚СЊ РјР°СЃРёРІРё РІРёРїР°РґРєРѕРІРёРјРё С‡РёСЃР»Р°РјРё [-10, 10]. РЎС‚РІРѕСЂС–С‚СЊ:
+		РћРґРЅРѕРІРёРјС–СЂРЅРёР№ РјР°СЃРёРІ, СЏРєРёР№ РјС–СЃС‚РёС‚СЊ СѓРЅС–РєР°Р»СЊРЅС– Р·РЅР°С‡РµРЅРЅСЏ РґР»СЏ A, B, C;
+		РћРґРЅРѕРІРёРјС–СЂРЅРёР№ РјР°СЃРёРІ, СЏРєРёР№ РјС–СЃС‚РёС‚СЊ СЃРїС–Р»СЊРЅС– Р·РЅР°С‡РµРЅРЅСЏ РґР»СЏ A С– C;
+		РћРґРЅРѕРІРёРјС–СЂРЅРёР№ РјР°СЃРёРІ, СЏРєРёР№ РјС–СЃС‚РёС‚СЊ РІС–Рґ'С”РјРЅС– Р·РЅР°С‡РµРЅРЅСЏ РґР»СЏ A, B, C Р±РµР· РїРѕРІС‚РѕСЂРµРЅСЊ.
 	*/
 
 #pragma region Exercise 4
@@ -180,10 +180,10 @@ int main()
 
 	/* ------------------------------- Array A ----------------------------------------*/
 
-	cout << endl << "\t\t\033[035mВвід масиву А\033[0m" << endl;
+	cout << endl << "\t\t\033[035mР’РІС–Рґ РјР°СЃРёРІСѓ Рђ\033[0m" << endl;
 
-	M1 = userInputNumber("рядків");
-	N1 = userInputNumber("стовпчиків");
+	M1 = userInputNumber("СЂСЏРґРєС–РІ");
+	N1 = userInputNumber("СЃС‚РѕРІРїС‡РёРєС–РІ");
 
 	int** A = new int* [M1];
 
@@ -195,10 +195,10 @@ int main()
 
 	/* ------------------------------- Array B ----------------------------------------*/
 
-	cout << endl << "\t\t\033[035mВвід масиву B\033[0m" << endl;
+	cout << endl << "\t\t\033[035mР’РІС–Рґ РјР°СЃРёРІСѓ B\033[0m" << endl;
 
-	M2 = userInputNumber("рядків");
-	N2 = userInputNumber("стовпчиків");
+	M2 = userInputNumber("СЂСЏРґРєС–РІ");
+	N2 = userInputNumber("СЃС‚РѕРІРїС‡РёРєС–РІ");
 
 	int** B = new int* [M2];
 
@@ -210,10 +210,10 @@ int main()
 
 	/* ------------------------------- Array C ----------------------------------------*/
 
-	cout << endl << "\t\t\033[035mВвід масиву C\033[0m" << endl;
+	cout << endl << "\t\t\033[035mР’РІС–Рґ РјР°СЃРёРІСѓ C\033[0m" << endl;
 
-	M3 = userInputNumber("рядків");
-	N3 = userInputNumber("стовпчиків");
+	M3 = userInputNumber("СЂСЏРґРєС–РІ");
+	N3 = userInputNumber("СЃС‚РѕРІРїС‡РёРєС–РІ");
 
 	int** C = new int* [M3];
 
@@ -225,13 +225,13 @@ int main()
 
 	/* ----------------------------- Output filled arrays ---------------------------- */
 
-	cout << endl << "\t\t\033[035mВивід масиву A\033[0m" << endl;
+	cout << endl << "\t\t\033[035mР’РёРІС–Рґ РјР°СЃРёРІСѓ A\033[0m" << endl;
 	outputArray(M1, N1, false, A);
 
-	cout << endl << "\t\t\033[035mВивід масиву B\033[0m" << endl;
+	cout << endl << "\t\t\033[035mР’РёРІС–Рґ РјР°СЃРёРІСѓ B\033[0m" << endl;
 	outputArray(M2, N2, false, B);
 
-	cout << endl << "\t\t\033[035mВивід масиву C\033[0m" << endl;
+	cout << endl << "\t\t\033[035mР’РёРІС–Рґ РјР°СЃРёРІСѓ C\033[0m" << endl;
 	outputArray(M3, N3, false, C);
 
 	/* --------------------------------------------------------------------------------*/
@@ -245,13 +245,13 @@ int main()
 															M2, N2, B,
 															M3, N3, C
 														);
-	cout << endl << "\033[033mУнікальні значення масивів А, B, C.\033[0m" << endl;
+	cout << endl << "\033[033mРЈРЅС–РєР°Р»СЊРЅС– Р·РЅР°С‡РµРЅРЅСЏ РјР°СЃРёРІС–РІ Рђ, B, C.\033[0m" << endl;
 	int* uniqueNumbers = result.first;
 	int size = result.second;
 
 	if (size == 0)
 	{
-		cout << endl << "\t\t\033[034mУнікальних значень не знайдено.\033[0m" << endl;
+		cout << endl << "\t\t\033[034mРЈРЅС–РєР°Р»СЊРЅРёС… Р·РЅР°С‡РµРЅСЊ РЅРµ Р·РЅР°Р№РґРµРЅРѕ.\033[0m" << endl;
 	}
 	else
 	{
@@ -273,13 +273,13 @@ int main()
 															M3, N3, C
 														);
 
-	cout << endl << "\033[033mСпільні значення масивів А і C.\033[0m" << endl;
+	cout << endl << "\033[033mРЎРїС–Р»СЊРЅС– Р·РЅР°С‡РµРЅРЅСЏ РјР°СЃРёРІС–РІ Рђ С– C.\033[0m" << endl;
 	int* commonVal = resultOfCommonArrays.first;
 	int sizeOfCommonValArray = resultOfCommonArrays.second;
 
 	if (sizeOfCommonValArray == 0) 
 	{
-		cout << endl << "\t\t\033[036mСпільних значень не знайдено.\033[0m" << endl;
+		cout << endl << "\t\t\033[036mРЎРїС–Р»СЊРЅРёС… Р·РЅР°С‡РµРЅСЊ РЅРµ Р·РЅР°Р№РґРµРЅРѕ.\033[0m" << endl;
 	}
 	else 
 	{
@@ -301,13 +301,13 @@ int main()
 																M3, N3, C
 															);
 
-	cout << endl << "\033[033mВід'ємні значення масивів А, B і C.\033[0m" << endl;
+	cout << endl << "\033[033mР’С–Рґ'С”РјРЅС– Р·РЅР°С‡РµРЅРЅСЏ РјР°СЃРёРІС–РІ Рђ, B С– C.\033[0m" << endl;
 	int* negativeNumbersForABC = negativeNumbersForABCandArrSize.first;
 	int negativeArraySize = negativeNumbersForABCandArrSize.second;
 
 	if (negativeArraySize == 0)
 	{
-		cout << endl << "\t\t\033[036mВід'ємних значень не знайдено.\033[0m" << endl;
+		cout << endl << "\t\t\033[036mР’С–Рґ'С”РјРЅРёС… Р·РЅР°С‡РµРЅСЊ РЅРµ Р·РЅР°Р№РґРµРЅРѕ.\033[0m" << endl;
 	}
 	else 
 	{
@@ -356,7 +356,7 @@ int main()
 
 void exercise(int exerciseNumber)
 {
-	cout << endl << endl << "\t\t\t\t\033[032m Завдання  " << exerciseNumber << "\033[0m" << endl;
+	cout << endl << endl << "\t\t\t\t\033[032m Р—Р°РІРґР°РЅРЅСЏ  " << exerciseNumber << "\033[0m" << endl;
 }
 
 void fullArray(int rows, int columns, int** arr)
@@ -416,13 +416,13 @@ int userInputNumber(string arrayName)
 
 	while (true)
 	{
-		cout << endl << "\033[033mВведіть ціле число для кількості \033[035m" << arrayName << "\033[033m масиву: \033[0m" << endl;
-		cout << "\033[033mВведіть ваш вибір: \033[0m";
+		cout << endl << "\033[033mР’РІРµРґС–С‚СЊ С†С–Р»Рµ С‡РёСЃР»Рѕ РґР»СЏ РєС–Р»СЊРєРѕСЃС‚С– \033[035m" << arrayName << "\033[033m РјР°СЃРёРІСѓ: \033[0m" << endl;
+		cout << "\033[033mР’РІРµРґС–С‚СЊ РІР°С€ РІРёР±С–СЂ: \033[0m";
 		cin >> userNum;
 
 		if (cin.fail())
 		{
-			cout << endl << "\033[031m Помилка! Будь ласка, введіть число.\033[0m\n" << endl;
+			cout << endl << "\033[031m РџРѕРјРёР»РєР°! Р‘СѓРґСЊ Р»Р°СЃРєР°, РІРІРµРґС–С‚СЊ С‡РёСЃР»Рѕ.\033[0m\n" << endl;
 			cin.clear();
 			cin.ignore(1000, '\n');
 			continue;
@@ -430,7 +430,7 @@ int userInputNumber(string arrayName)
 
 		if (userNum < 1)
 		{
-			cout << endl << "\033[031m Помилка! Будь ласка, введіть ціле число більше за 0.\033[0m\n" << endl;
+			cout << endl << "\033[031m РџРѕРјРёР»РєР°! Р‘СѓРґСЊ Р»Р°СЃРєР°, РІРІРµРґС–С‚СЊ С†С–Р»Рµ С‡РёСЃР»Рѕ Р±С–Р»СЊС€Рµ Р·Р° 0.\033[0m\n" << endl;
 			continue;
 		}
 
@@ -447,14 +447,14 @@ void shiftArray(int rows, int columns, T**& arr)
 	int choice;
 	while (true) {
 		cout << endl
-			<< "\033[033mВиберіть тип зсуву:\033[0m" << endl
-			<< "\t\t1 - Зсув рядка (вправо/вліво)" << endl
-			<< "\t\t2 - Зсув стовпця (вниз/вгору)" << endl;
-		cout << "\033[033mВаш вибір: \033[0m";
+			<< "\033[033mР’РёР±РµСЂС–С‚СЊ С‚РёРї Р·СЃСѓРІСѓ:\033[0m" << endl
+			<< "\t\t1 - Р—СЃСѓРІ СЂСЏРґРєР° (РІРїСЂР°РІРѕ/РІР»С–РІРѕ)" << endl
+			<< "\t\t2 - Р—СЃСѓРІ СЃС‚РѕРІРїС†СЏ (РІРЅРёР·/РІРіРѕСЂСѓ)" << endl;
+		cout << "\033[033mР’Р°С€ РІРёР±С–СЂ: \033[0m";
 		cin >> choice;
 
 		if (cin.fail() || (choice != 1 && choice != 2)) {
-			cout << endl << "\033[031mПомилка! Введіть 1 або 2.\033[0m\n" << endl;
+			cout << endl << "\033[031mРџРѕРјРёР»РєР°! Р’РІРµРґС–С‚СЊ 1 Р°Р±Рѕ 2.\033[0m\n" << endl;
 			cin.clear();
 			cin.ignore(1000, '\n');
 			continue;
@@ -465,11 +465,11 @@ void shiftArray(int rows, int columns, T**& arr)
 	if (choice == 1) {
 		int userRow, direction;
 		while (true) {
-			cout << endl << "\033[033mВведіть номер рядка для зсуву (1-" << rows << "): \033[0m";
+			cout << endl << "\033[033mР’РІРµРґС–С‚СЊ РЅРѕРјРµСЂ СЂСЏРґРєР° РґР»СЏ Р·СЃСѓРІСѓ (1-" << rows << "): \033[0m";
 			cin >> userRow;
 
 			if (cin.fail() || userRow < 1 || userRow > rows) {
-				cout << endl << "\033[031mПомилка! Введіть коректний номер рядка.\033[0m\n" << endl;
+				cout << endl << "\033[031mРџРѕРјРёР»РєР°! Р’РІРµРґС–С‚СЊ РєРѕСЂРµРєС‚РЅРёР№ РЅРѕРјРµСЂ СЂСЏРґРєР°.\033[0m\n" << endl;
 				cin.clear();
 				cin.ignore(1000, '\n');
 				continue;
@@ -479,14 +479,14 @@ void shiftArray(int rows, int columns, T**& arr)
 
 		while (true) {
 			cout << endl
-				<< "\033[033mВиберіть напрямок зсуву:\033[0m" << endl
-				<< "\t\t1 - Вправо" << endl
-				<< "\t\t2 - Вліво" << endl;
-			cout << "\033[033mВаш вибір: \033[0m";
+				<< "\033[033mР’РёР±РµСЂС–С‚СЊ РЅР°РїСЂСЏРјРѕРє Р·СЃСѓРІСѓ:\033[0m" << endl
+				<< "\t\t1 - Р’РїСЂР°РІРѕ" << endl
+				<< "\t\t2 - Р’Р»С–РІРѕ" << endl;
+			cout << "\033[033mР’Р°С€ РІРёР±С–СЂ: \033[0m";
 			cin >> direction;
 
 			if (cin.fail() || (direction != 1 && direction != 2)) {
-				cout << endl << "\033[031mПомилка! Виберіть 1 або 2.\033[0m\n" << endl;
+				cout << endl << "\033[031mРџРѕРјРёР»РєР°! Р’РёР±РµСЂС–С‚СЊ 1 Р°Р±Рѕ 2.\033[0m\n" << endl;
 				cin.clear();
 				cin.ignore(1000, '\n');
 				continue;
@@ -514,11 +514,11 @@ void shiftArray(int rows, int columns, T**& arr)
 	else if (choice == 2) {
 		int userColumn, direction;
 		while (true) {
-			cout << endl << "\033[033mВведіть номер стовпця для зсуву (1-" << columns << "): \033[0m";
+			cout << endl << "\033[033mР’РІРµРґС–С‚СЊ РЅРѕРјРµСЂ СЃС‚РѕРІРїС†СЏ РґР»СЏ Р·СЃСѓРІСѓ (1-" << columns << "): \033[0m";
 			cin >> userColumn;
 
 			if (cin.fail() || userColumn < 1 || userColumn > columns) {
-				cout << endl << "\033[031mПомилка! Введіть коректний номер стовпця.\033[0m\n" << endl;
+				cout << endl << "\033[031mРџРѕРјРёР»РєР°! Р’РІРµРґС–С‚СЊ РєРѕСЂРµРєС‚РЅРёР№ РЅРѕРјРµСЂ СЃС‚РѕРІРїС†СЏ.\033[0m\n" << endl;
 				cin.clear();
 				cin.ignore(1000, '\n');
 				continue;
@@ -528,14 +528,14 @@ void shiftArray(int rows, int columns, T**& arr)
 
 		while (true) {
 			cout << endl
-				<< "\033[033mВиберіть напрямок зсуву:\033[0m" << endl
-				<< "\t\t1 - Вниз" << endl
-				<< "\t\t2 - Вгору" << endl;
-			cout << "\033[033mВаш вибір: \033[0m";
+				<< "\033[033mР’РёР±РµСЂС–С‚СЊ РЅР°РїСЂСЏРјРѕРє Р·СЃСѓРІСѓ:\033[0m" << endl
+				<< "\t\t1 - Р’РЅРёР·" << endl
+				<< "\t\t2 - Р’РіРѕСЂСѓ" << endl;
+			cout << "\033[033mР’Р°С€ РІРёР±С–СЂ: \033[0m";
 			cin >> direction;
 
 			if (cin.fail() || (direction != 1 && direction != 2)) {
-				cout << endl << "\033[031mПомилка! Виберіть 1 або 2.\033[0m\n" << endl;
+				cout << endl << "\033[031mРџРѕРјРёР»РєР°! Р’РёР±РµСЂС–С‚СЊ 1 Р°Р±Рѕ 2.\033[0m\n" << endl;
 				cin.clear();
 				cin.ignore(1000, '\n');
 				continue;
@@ -561,7 +561,7 @@ void shiftArray(int rows, int columns, T**& arr)
 		}
 	}
 
-	cout << "\n\033[032mОновлений масив:\033[0m\n";
+	cout << "\n\033[032mРћРЅРѕРІР»РµРЅРёР№ РјР°СЃРёРІ:\033[0m\n";
 	outputArray(rows, columns, false, arr, 0);
 }
 
@@ -576,10 +576,10 @@ void userChoiceForExThree(int amountRows, int amountColumns, Type& array)
 		countOfChanges++;
 		if (countOfChanges != 1) 
 		{
-			cout << endl << "\033[032mБажаєте продовжити робиту з масивом?\033[0m" << endl <<
-				"\t\t1 - Так;" << endl <<
-				"\t\t2 - Ні;" << endl;
-			cout << "\033[032mВведіть ваш вибір: \033[0m";
+			cout << endl << "\033[032mР‘Р°Р¶Р°С”С‚Рµ РїСЂРѕРґРѕРІР¶РёС‚Рё СЂРѕР±РёС‚Сѓ Р· РјР°СЃРёРІРѕРј?\033[0m" << endl <<
+				"\t\t1 - РўР°Рє;" << endl <<
+				"\t\t2 - РќС–;" << endl;
+			cout << "\033[032mР’РІРµРґС–С‚СЊ РІР°С€ РІРёР±С–СЂ: \033[0m";
 			cin >> userNum;
 		}
 		else
@@ -589,7 +589,7 @@ void userChoiceForExThree(int amountRows, int amountColumns, Type& array)
 
 		if (cin.fail())
 		{
-			cout << endl << "\033[031m Помилка! Будь ласка, введіть число.\033[0m\n" << endl;
+			cout << endl << "\033[031m РџРѕРјРёР»РєР°! Р‘СѓРґСЊ Р»Р°СЃРєР°, РІРІРµРґС–С‚СЊ С‡РёСЃР»Рѕ.\033[0m\n" << endl;
 			cin.clear();
 			cin.ignore(1000, '\n');
 			continue;
@@ -612,13 +612,13 @@ int addColumn(int& numberOfColumns, int numberOfRows, T**& arr) {
 	int column;
 	while (true) {
 		
-		cout << endl << "\033[033mВведіть номер стовпчика для додавання: \033[0m" << endl;
-		cout << "\033[033mВведіть ваш вибір: \033[0m";
+		cout << endl << "\033[033mР’РІРµРґС–С‚СЊ РЅРѕРјРµСЂ СЃС‚РѕРІРїС‡РёРєР° РґР»СЏ РґРѕРґР°РІР°РЅРЅСЏ: \033[0m" << endl;
+		cout << "\033[033mР’РІРµРґС–С‚СЊ РІР°С€ РІРёР±С–СЂ: \033[0m";
 		cin >> column;
 
 		if (cin.fail())
 		{
-			cout << endl << "\033[031m Помилка! Будь ласка, введіть число.\033[0m\n" << endl;
+			cout << endl << "\033[031m РџРѕРјРёР»РєР°! Р‘СѓРґСЊ Р»Р°СЃРєР°, РІРІРµРґС–С‚СЊ С‡РёСЃР»Рѕ.\033[0m\n" << endl;
 			cin.clear();
 			cin.ignore(1000, '\n');
 			continue;
@@ -626,11 +626,11 @@ int addColumn(int& numberOfColumns, int numberOfRows, T**& arr) {
 
 		if (column < 1)
 		{
-			cout << endl << "\033[031m Помилка! Будь ласка, введіть ціле число більше за 0.\033[0m\n" << endl;
+			cout << endl << "\033[031m РџРѕРјРёР»РєР°! Р‘СѓРґСЊ Р»Р°СЃРєР°, РІРІРµРґС–С‚СЊ С†С–Р»Рµ С‡РёСЃР»Рѕ Р±С–Р»СЊС€Рµ Р·Р° 0.\033[0m\n" << endl;
 			continue;
 		}
 		if (column > numberOfColumns+1 || column < 1) {
-			cout << endl << "\033[031mПомилка! Ви ввели некоректний номер стовпчика. Всього " << to_string(numberOfColumns) << " стовпчиків\033[0m\n";
+			cout << endl << "\033[031mРџРѕРјРёР»РєР°! Р’Рё РІРІРµР»Рё РЅРµРєРѕСЂРµРєС‚РЅРёР№ РЅРѕРјРµСЂ СЃС‚РѕРІРїС‡РёРєР°. Р’СЃСЊРѕРіРѕ " << to_string(numberOfColumns) << " СЃС‚РѕРІРїС‡РёРєС–РІ\033[0m\n";
 			continue;
 		}
 
@@ -675,13 +675,13 @@ int removeColumn(int& numberOfColumns, int numberOfRows, T**& arr) {
 	int column;
 	while (true) {
 
-		cout << endl << "\033[033mВведіть номер стовпчика для видалення: \033[0m" << endl;
-		cout << "\033[033mВведіть ваш вибір: \033[0m";
+		cout << endl << "\033[033mР’РІРµРґС–С‚СЊ РЅРѕРјРµСЂ СЃС‚РѕРІРїС‡РёРєР° РґР»СЏ РІРёРґР°Р»РµРЅРЅСЏ: \033[0m" << endl;
+		cout << "\033[033mР’РІРµРґС–С‚СЊ РІР°С€ РІРёР±С–СЂ: \033[0m";
 		cin >> column;
 
 		if (cin.fail())
 		{
-			cout << endl << "\033[031m Помилка! Будь ласка, введіть число.\033[0m\n" << endl;
+			cout << endl << "\033[031m РџРѕРјРёР»РєР°! Р‘СѓРґСЊ Р»Р°СЃРєР°, РІРІРµРґС–С‚СЊ С‡РёСЃР»Рѕ.\033[0m\n" << endl;
 			cin.clear();
 			cin.ignore(1000, '\n');
 			continue;
@@ -689,11 +689,11 @@ int removeColumn(int& numberOfColumns, int numberOfRows, T**& arr) {
 
 		if (column < 1)
 		{
-			cout << endl << "\033[031m Помилка! Будь ласка, введіть ціле число більше за 0.\033[0m\n" << endl;
+			cout << endl << "\033[031m РџРѕРјРёР»РєР°! Р‘СѓРґСЊ Р»Р°СЃРєР°, РІРІРµРґС–С‚СЊ С†С–Р»Рµ С‡РёСЃР»Рѕ Р±С–Р»СЊС€Рµ Р·Р° 0.\033[0m\n" << endl;
 			continue;
 		}
 		if (column > numberOfColumns || column < 1) {
-			cout << endl << "\033[031mПомилка! Ви ввели некоректний номер стовпчика. Всього " << to_string(numberOfColumns) << " стовпчиків\033[0m\n";
+			cout << endl << "\033[031mРџРѕРјРёР»РєР°! Р’Рё РІРІРµР»Рё РЅРµРєРѕСЂРµРєС‚РЅРёР№ РЅРѕРјРµСЂ СЃС‚РѕРІРїС‡РёРєР°. Р’СЃСЊРѕРіРѕ " << to_string(numberOfColumns) << " СЃС‚РѕРІРїС‡РёРєС–РІ\033[0m\n";
 			continue;
 		}
 
@@ -730,7 +730,7 @@ void clearArray(int**& arr, int rows) {
 		delete[] arr[i];
 	}
 	delete[] arr;
-	arr = nullptr; // Уникнення "висячих" вказівників
+	arr = nullptr; // РЈРЅРёРєРЅРµРЅРЅСЏ "РІРёСЃСЏС‡РёС…" РІРєР°Р·С–РІРЅРёРєС–РІ
 }
 
 template <typename T>

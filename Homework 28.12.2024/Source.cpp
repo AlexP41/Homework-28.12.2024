@@ -897,4 +897,4 @@ pair <T*, int> negativeNumbersOfArrays(int  amountOfArrays, ...)
 
 
 
-/* Homewrok on 28.12.2024 has been completed successfully! */
+/* Homework on 28.12.2024 has been completed successfully! */

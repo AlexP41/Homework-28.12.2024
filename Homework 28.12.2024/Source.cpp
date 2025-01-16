@@ -55,6 +55,9 @@ pair<T*, int> oneDimensionalArrayOfUniqueNumbers(int amountOfArrays, ...);
 template <typename T>
 pair<T*, int> commonValuesOfArrays(int amountOfArrays, ...);
 
+template <typename T>
+pair <T*, int> negativeNumbersOfArrays(int  amountOfArrays, ...);
+
 #pragma endregion
 
 
@@ -239,7 +242,8 @@ int main()
 	auto result = oneDimensionalArrayOfUniqueNumbers<int>(	3, 
 															M1, N1, A, 
 															M2, N2, B,
-															M3, N3, C);
+															M3, N3, C
+														);
 	cout << endl << "\033[033mУнікальні значення масивів А, B, C.\033[0m" << endl;
 	int* uniqueNumbers = result.first;
 	int size = result.second;
@@ -287,6 +291,34 @@ int main()
 	/* --------------------------------------------------------------------------------*/
 
 
+
+	/* --------------------- Negative values for A, B and C arrays ---------------------*/
+
+	auto negativeNumbersForABCandArrSize = negativeNumbersOfArrays<int>(	3,
+																M1, N1, A,
+																M2, N2, B,
+																M3, N3, C
+															);
+
+	cout << endl << "\033[033mВід'ємні значення масивів А, B і C.\033[0m" << endl;
+	int* negativeNumbersForABC = negativeNumbersForABCandArrSize.first;
+	int negativeArraySize = negativeNumbersForABCandArrSize.second;
+
+	if (negativeArraySize == 0)
+	{
+		cout << endl << "\t\t\033[036mВід'ємних значень не знайдено.\033[0m" << endl;
+	}
+	else 
+	{
+		for (int i = 0; i < negativeArraySize; i++)
+		{
+			cout << setw(4) << negativeNumbersForABC[i];
+		}
+		cout << endl;
+	}
+
+	/* --------------------------------------------------------------------------------*/
+
 	
 #pragma endregion
 
@@ -308,6 +340,8 @@ int main()
 	delete[] uniqueNumbers;
 
 	delete[] commonVal;
+
+	delete[] negativeNumbersForABC;
  
 	return 0;
 
@@ -812,6 +846,51 @@ pair<T*, int> commonValuesOfArrays(int amountOfArrays, ...)
 	}
 
 	return make_pair(resultArray, index);
+}
+
+template <typename T>
+pair <T*, int> negativeNumbersOfArrays(int  amountOfArrays, ...)
+{
+	static_assert(is_arithmetic_v<T>, "The template type T must be a numeric type.");
+
+	va_list args;
+	va_start(args, amountOfArrays);
+
+	unordered_set<T>negNumbers;
+	for (int i = 0; i < amountOfArrays; i++)
+	{
+		int rows = va_arg(args, int);
+		int cols = va_arg(args, int);
+		T** currentArray = va_arg(args, T**);
+
+		for (int r = 0; r < rows; r++)
+		{
+			for (int c = 0; c < cols; c++)
+			{
+				if (currentArray[r][c] < 0)
+				{
+					negNumbers.insert(currentArray[r][c]);
+				}
+			}
+		}
+	}
+
+	int resSize = negNumbers.size();
+	T* resArray = new T[resSize];
+
+	int index = 0;
+	for (const T& num : negNumbers)
+	{
+		if (index >= resSize)
+		{
+			cerr << "Index out of bounds! Exceeding resultSize." << endl;
+			break; // Stop if overrun happens
+		}
+
+		resArray[index++] = num;
+	}
+
+	return make_pair(resArray, resSize);
 }
 
 #pragma endregion

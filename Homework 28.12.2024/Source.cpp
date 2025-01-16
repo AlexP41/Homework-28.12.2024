@@ -12,6 +12,12 @@ https://fsx1.itstep.org/api/v1/files/XUktlJsLKP_gytLegZ8WrOEc_IJ7aJgy?inline=tru
 #include <iomanip>
 #include <locale>
 #include <string>
+#include <cstdarg>
+#include <vector>
+#include <set>
+#include <unordered_map>
+#include <type_traits>
+#include <utility>
 
 #define LOW_BOARD_FOR_GENERATION_NUMBERS -10
 #define HIGH_BOARD_FOR_GENERATION_NUMBERS 10
@@ -43,7 +49,70 @@ void shiftArray(int rows, int columns, T**& arr);
 
 void clearArray(int**& arr, int rows);
 
+template <typename T>
+pair<T*, int> oneDimensionalArrayOfUniqueNumbers(int amountOfArrays, ...);
+
 #pragma endregion
+
+template <typename T>
+pair<T*, int> commonValuesOfArrays(int amountOfArrays, ...)
+{
+	static_assert(is_arithmetic_v<T>, "The template type T must be a numeric type.");
+
+	va_list args;
+	va_start(args, amountOfArrays);
+	vector<T>arraysValues;
+
+	for (int i = 0; i < amountOfArrays; i++)
+	{
+
+		int rows = va_arg(args, int);
+		int cols = va_arg(args, int);
+		T** currentArray = va_arg(args, T**);
+
+		for (int r = 0; r < rows; r++)
+		{
+			for (int c = 0; c < cols; c++)
+			{
+				arraysValues.push_back(currentArray[r][c]);
+			}
+		}
+	}
+
+	unordered_map<T, int> frequency;
+	for (const T& num: arraysValues)
+	{
+		frequency[num]++;
+	}
+
+	set<T>commonValues;
+	for (const T& num : arraysValues)
+	{
+		if (frequency[num] > 1)
+		{
+			commonValues.insert(num);
+		}
+	}
+
+	int resultSize = commonValues.size();
+	T* resultArray = new T[resultSize];
+	int index = 0;
+	/*for (auto it = commonValues.begin(); it != commonValues.end(); it++)
+	{
+		resultArray[index] = *it;
+		index++;
+	}*/
+	for (const T& num : commonValues) {
+		// THis code snippet I took from Chat-GPT to fix "buffer overrun" warning
+		if (index >= resultSize) {
+			cerr << "Index out of bounds! Exceeding resultSize." << endl;
+			break; // Stop if overrun happens
+		}
+		resultArray[index++] = num;
+	}
+	
+	return make_pair(resultArray,index);
+}
 
 
 int main()
@@ -205,6 +274,54 @@ int main()
 	cout << endl << "\t\t\033[035mВивід масиву C\033[0m" << endl;
 	outputArray(M3, N3, false, C);
 
+	/* Unique numbers */
+	auto result = oneDimensionalArrayOfUniqueNumbers<int>(	3, 
+															M1, N1, A, 
+															M2, N2, B,
+															M3, N3, C);
+	cout << endl << "\033[033mУнікальні значення масивів А, B, C.\033[0m" << endl;
+	int* uniqueNumbers = result.first;
+	int size = result.second;
+
+	if (size == 0)
+	{
+		cout << endl << "\t\t\033[034mУнікальних значень не знайдено.\033[0m" << endl;
+	}
+	else
+	{
+		for (int i = 0; i < size; i++)
+		{
+			cout << setw(4) << uniqueNumbers[i];
+		}
+		cout << endl;
+	}
+
+	/* Common values for A and C arrays*/
+	auto resultOfCommonArrays = commonValuesOfArrays<int>(  2,
+															M1, N1, A,
+															M3, N3, C
+														);
+
+	cout << endl << "\033[033mСпільні значення масивів А і C.\033[0m" << endl;
+	int* commonVal = resultOfCommonArrays.first;
+	int sizeOfCommonValArray = resultOfCommonArrays.second;
+
+	if (sizeOfCommonValArray == 0) 
+	{
+		cout << endl << "\t\t\033[036mСпільних значень не знайдено.\033[0m" << endl;
+	}
+	else 
+	{
+		for (int i = 0; i < sizeOfCommonValArray; i++)
+		{
+			cout << setw(4) << commonVal[i];
+		}
+		cout << endl;
+	}
+	
+
+
+	
 #pragma endregion
 
     /* Deleting block for all arrays */
@@ -221,6 +338,8 @@ int main()
 	clearArray(B, M2);
 
 	clearArray(C, M3);
+
+	delete[] uniqueNumbers;
 
 	return 0;
 
@@ -611,5 +730,59 @@ void clearArray(int**& arr, int rows) {
 	arr = nullptr; // Уникнення "висячих" вказівників
 }
 
+template <typename T>
+pair<T*, int> oneDimensionalArrayOfUniqueNumbers(int amountOfArrays, ...)
+{
+	static_assert(is_arithmetic_v<T>, "The template type T must be a numeric type.");
+
+	/*T resultArray[maxSize];*/
+	vector<T>allNumbers;
+
+	va_list args;
+	va_start(args, amountOfArrays);
+	for (int i = 0; i < amountOfArrays; i++)
+	{
+		int rows = va_arg(args, int);
+		int cols = va_arg(args, int);
+		T** currentArray = va_arg(args, T**);
+
+		for (int i = 0; i < rows; i++)
+		{
+			for (int j = 0; j < cols; j++)
+			{
+				allNumbers.push_back(currentArray[i][j]);
+			}
+		}
+	}
+
+	va_end(args);
+
+	unordered_map<T, int> frequency;
+	for (const T& num : allNumbers)
+	{
+		frequency[num]++;
+	}
+
+	vector<T> uniqueNumbers;
+	for (const T& num : allNumbers)
+	{
+		if (frequency[num] == 1)
+		{
+			uniqueNumbers.push_back(num);
+		}
+	}
+
+	int uniqueSize = uniqueNumbers.size();
+
+	T* resultArray = new T[uniqueSize];
+
+	int index = 0;
+	for (int i = 0; i < uniqueSize; ++i)
+	{
+		resultArray[i] = uniqueNumbers[i];
+	}
+
+	return make_pair(resultArray, uniqueSize);
+}
 
 #pragma endregion

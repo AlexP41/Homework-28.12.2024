@@ -64,6 +64,7 @@ pair <T*, int> negativeNumbersOfArrays(int  amountOfArrays, ...);
 int main()
 {
 	system("chcp 1251>null");
+	setlocale(LC_ALL, "uk_UA.UTF-8");
 	srand(time(NULL));
 
 	/*
@@ -894,7 +895,6 @@ pair <T*, int> negativeNumbersOfArrays(int  amountOfArrays, ...)
 }
 
 #pragma endregion
-
 
 
 /* Homework on 28.12.2024 has been completed successfully! */
